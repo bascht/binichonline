@@ -1,0 +1,3 @@
+* Bin ich online?
+
+Display network connectivity when connected to flaky / slow networks.
