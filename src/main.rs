@@ -11,10 +11,7 @@ struct Looper {
 impl Looper {
     pub fn run(&self) {
         loop {
-            match net::is_online() {
-                true  => ui::online(),
-                false => ui::offline()
-            }
+            ui::update(net::is_online());
             thread::sleep_ms(self.interval);
             ui::clear_screen();
         }
