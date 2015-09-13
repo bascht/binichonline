@@ -5,13 +5,13 @@ pub mod ui {
         let mut t = term::stdout().unwrap();
         t.fg(term::color::GREEN).unwrap();
         writeln!(t, "Online").unwrap();
-
+        t.reset();
     }
     pub fn offline() {
         let mut t = term::stdout().unwrap();
         t.fg(term::color::RED).unwrap();
         writeln!(t, "Offline").unwrap();
-
+        t.reset();
     }
     pub fn clear_screen() {
         println!("\x1b[2J\x1b[1;1H");
@@ -20,7 +20,6 @@ pub mod ui {
 
 pub mod net {
     extern crate curl;
-
     use self::curl::http;
 
     pub fn is_online() -> bool {
