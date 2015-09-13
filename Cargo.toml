@@ -1,0 +1,9 @@
+[package]
+name = "binichonline"
+version = "0.1.0"
+authors = ["Sebastian Schulze <github.com@bascht.com>"]
+
+[dependencies]
+time = "0.1.32"
+curl = "0.2.11"
+term = "0.2"
