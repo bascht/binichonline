@@ -2,11 +2,10 @@ pub mod ui {
     extern crate term;
     use net;
 
-    pub fn update(state: Result<net::State, net::State>) {
+    pub fn update(state: net::State) {
         match state {
-            Ok(net::State::Online)  => online(),
-            Err(net::State::Offline) => offline(),
-            _ => println!("WHAT?"),
+            net::State::Online  => online(),
+            net::State::Offline => offline()
         }
     }
 
@@ -31,14 +30,14 @@ pub mod net {
     extern crate curl;
     use self::curl::http;
     pub enum State { Online, Offline }
-    pub fn is_online() -> Result<State, State> {
+    pub fn is_online() -> State {
         let resp = http::handle()
             .get("http://localhost:8000")
             .exec();
 
         match resp {
-            Ok(r) => Ok(State::Online),
-            Err(e) => Err(State::Offline)
+            Ok(r) => State::Online,
+            Err(e) => State::Offline
         }
     }
 
