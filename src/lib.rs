@@ -29,10 +29,18 @@ pub mod ui {
 pub mod net {
     extern crate curl;
     use self::curl::http;
+    use std::env;
     pub enum State { Online, Offline }
     pub fn is_online() -> State {
+
+        // Going full on rust here. Thanks @skade! :D
+        let env_var = env::var_os("ONLINE_CHECK_HOST");
+        let check_target = env_var.as_ref()
+            .map(|val| val.to_str().unwrap())
+            .unwrap_or("https://duckduckgo.com/");
+
         let resp = http::handle()
-            .get("http://localhost:8000")
+            .get(check_target)
             .exec();
 
         match resp {
