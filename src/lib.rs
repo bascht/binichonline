@@ -28,19 +28,30 @@ pub mod ui {
 
 pub mod net {
     extern crate curl;
+    extern crate url;
     use self::curl::http;
     use std::env;
+    use self::
+    url::Url;
+
     pub enum State { Online, Offline }
     pub fn is_online() -> State {
 
         // Going full on rust here. Thanks @skade! :D
         let env_var = env::var_os("ONLINE_CHECK_HOST");
-        let check_target = env_var.as_ref()
-            .map(|val| val.to_str().unwrap())
-            .unwrap_or("https://duckduckgo.com/");
+
+        let url = match env_var {
+            Some(ref val) => val.to_str().unwrap(),
+            None => "http://duckduckgo.com/"
+        };
+
+        let check_target = match Url::parse(url) {
+            Ok(v) => v,
+            Err(e) => panic!("Sorry, URL {:?} is broken because of a {:?} error.", url, e)
+        };
 
         let resp = http::handle()
-            .get(check_target)
+            .get(&check_target)
             .exec();
 
         match resp {
