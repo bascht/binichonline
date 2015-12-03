@@ -4,23 +4,18 @@ pub mod ui {
 
     pub fn update(state: net::State) {
         match state {
-            net::State::Online  => online(),
-            net::State::Offline => offline()
+            net::State::Online  => redraw("Online",  term::color::GREEN),
+            net::State::Offline => redraw("Offline", term::color::RED)
         }
+
+        fn redraw(text: &str, color: u16) {
+            let mut t = term::stdout().unwrap();
+            t.fg(color).unwrap();
+            writeln!(t, "{:?}", text).unwrap();
+            t.reset();
+        };
     }
 
-    pub fn online() {
-        let mut t = term::stdout().unwrap();
-        t.fg(term::color::GREEN).unwrap();
-        writeln!(t, "Online").unwrap();
-        t.reset();
-    }
-    pub fn offline() {
-        let mut t = term::stdout().unwrap();
-        t.fg(term::color::RED).unwrap();
-        writeln!(t, "Offline").unwrap();
-        t.reset();
-    }
     pub fn clear_screen() {
         println!("\x1b[2J\x1b[1;1H");
     }
