@@ -1,3 +1,12 @@
-* Bin ich online?
+* bɪn ɪç ˈɔnlaɪ̯n?
 
-Display network connectivity when connected to flaky / slow networks.
+Display network connectivity when connected to [flaky, slow,
+corporate] networks. Run this app in a small terminal window.
+
+[[./screenshot.png]]
+
+** Custom check URL
+   Supply a custom check url via the environment variable =ONLINE_CHECK_HOST=.
+#+BEGIN_SRC bash
+ONLINE_CHECK_HOST=http://google.com cargo run
+#+END_SRC

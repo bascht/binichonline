@@ -33,7 +33,7 @@ pub mod net {
     pub fn is_online() -> State {
 
         // Going full on rust here. Thanks @skade! :D
-        let env_var = env::var_os("ONLINE_CHECK_HOST");
+        let env_var = env::var_os("ONLINE_CHECK_URL");
 
         let url = match env_var {
             Some(ref val) => val.to_str().unwrap(),
