@@ -2,7 +2,9 @@ language: rust
 rust:
 - stable
 - beta
-script: cargo build --verbose --all --release
+script:
+  - cargo build --verbose --all --release
+  - find target
 matrix:
   allow_failures:
   - rust: beta
@@ -13,3 +15,4 @@ deploy:
   file: target/release/binichonline
   on:
     repo: bascht/binichonline
+    tags: true
