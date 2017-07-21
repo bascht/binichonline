@@ -12,7 +12,7 @@ pub mod ui {
             let mut t = term::stdout().unwrap();
             t.fg(color).unwrap();
             writeln!(t, "{:?}", text).unwrap();
-            t.reset();
+            let _ = t.reset();
         };
     }
 
