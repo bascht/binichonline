@@ -2,6 +2,9 @@ language: rust
 rust:
 - stable
 - beta
+sudo: required
+services:
+  - docker
 script:
   - cargo install cross
   - cross build --release --target=x86_64-unknown-linux-musl
