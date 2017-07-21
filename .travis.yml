@@ -2,7 +2,9 @@ language: rust
 rust:
 - stable
 - beta
-script: cargo build --verbose --all --release
+script:
+  - rustup target add x86_64-unknown-linux-musl
+  - cargo build --all --release --target x86_64-unknown-linux-musl
 matrix:
   allow_failures:
   - rust: beta
