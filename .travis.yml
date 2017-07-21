@@ -3,8 +3,9 @@ rust:
 - stable
 - beta
 script:
-  - rustup target add x86_64-unknown-linux-musl
-  - cargo build --all --release --target x86_64-unknown-linux-musl
+  - cargo install cross
+  - cross build --release --target=x86_64-unknown-linux-musl
+  - cross build --release --target=x86_64-pc-windows-gnu	
 matrix:
   allow_failures:
   - rust: beta
@@ -13,7 +14,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: xDt7To/pv4kz7nBiRBj/tC9kb0lzkdHHxgIYz4zCSBbI8HAgi+UpAZab1YSASLZUkREfBE7bKKeB7DPBNV66H/zT/OXfivayJkZhfl9dKGMI4r2StL+grycIWYS4unzC6ZEDQPKgEtjp541TMoRU4am0IIIlugK3L8Tc1DByVz37SY8+JbLsDXcaNTZgIutYkS10D0Ebdn/wj5H5iM7MZLvq3L0JPVR1J5bO8nloTRKXsDCCFc586qrX4twj8SkYCDm1wpPFrk86qa3BqQ8U4PyFFsufC5babCLAc2eV1hd+LVB/8GScWkLKHBakThMAaefBLj188rMvxKzSAe61SO/LJYIc7YxgdzNnLKH9+wdm2Mf4Z0588EbsU5r66EULuALF/rU7GP4gfUWCsZdJmWOaeJxF23pFXu3Zi2nqd9kA7sEhVKMdHQf2ep8IDcKardiiQ8W+kCuQHhEs1pBjDxzy+iP0A5x2csPzadZoZBYnTvRbD9Jzgtjv9vMKh6nXKo50TCZ9Yc/zy3uWTAdqxxIZhXD8l7eGljEdHCffbXJDUeNfhCGwwgp9zngbp0z3kpsnw/TPJ1CY8IopE5oyiGdmNqz7hDlUtm9fon+PHBt5PlOhfe9e2mSHWEH17mSnHRq2OmVRrfpmrpD3j+usC6x9ztg0rsjf3yOfEcTiKoE=
-  file: target/release/binichonline
+  file: target/x86_64-unknown-linux-musl/release/binichonline
   on:
     repo: bascht/binichonline
     tags: true
