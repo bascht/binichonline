@@ -24,7 +24,7 @@ pub mod ui {
 pub mod net {
     extern crate curl;
     extern crate url;
-    use self::curl::http;
+    use self::curl::easy::Easy;
     use std::env;
     use self::
     url::Url;
@@ -45,9 +45,10 @@ pub mod net {
             Err(e) => panic!("Sorry, URL {:?} is broken because of a {:?} error.", url, e)
         };
 
-        let resp = http::handle()
-            .get(&check_target)
-            .exec();
+        let mut easy = Easy::new();
+
+        easy.url(check_target.as_str()).unwrap();
+        let resp = easy.perform();
 
         match resp {
             Ok(r) => State::Online,

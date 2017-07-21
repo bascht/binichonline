@@ -1,13 +1,13 @@
 [package]
 name = "binichonline"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Sebastian Schulze <github.com@bascht.com>"]
 
 [dependencies]
-time = "0.1.32"
-curl = "0.2.11"
-term = "0.2"
-url = "0.2.37"
+time = "0.1.38"
+curl = "0.4.8"
+term = "0.4.6"
+url = "1.5.1"
 
 [[bin]]
 name = "binichonline"
